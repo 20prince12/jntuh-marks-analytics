@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate Your CGPA</title>
+</head>
+<body>
+    <form method="post" action="/calculate">
+        <label for="roll">Enter roll No:</label>
+        <input type="text" name="roll">
+        <input type="submit">
+        {% if x %}
+            Your CGPA is : {{ x }}
+        {% endif %}
+    </form>
+</body>
+</html>
