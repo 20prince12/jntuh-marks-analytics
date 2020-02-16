@@ -49,4 +49,4 @@ class getResultData:
             if (points[self.marksData[x]] == 0):
                 return 0
             cgpa += points[self.marksData[x]] * int(self.creditsData[x]) / self.totalcredits
-        self.cgpa=cgpa
+        self.cgpa=format(cgpa,'.2f')

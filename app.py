@@ -23,3 +23,11 @@ def calculate():
         return render_template('cgpa.html',x=student.cgpa)
     else:
         return render_template('cgpa.html')
+
+@app.route('/getlist', methods=['GET','POST'])
+def getlist():
+    if request.method == 'POST':
+        start=request.form.get('start')
+        end=request.form.get('end')
+        
+    return render_template('getlist.html')
