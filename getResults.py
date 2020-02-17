@@ -47,7 +47,6 @@ class getResultData:
             self.totalcredits += int(self.creditsData[x])
         for x in self.marksData:
             if (points[self.marksData[x]] == 0):
-                self.cgpa="failed student calculation under maintanence"
-                break
+            return 0
             cgpa += points[self.marksData[x]] * int(self.creditsData[x]) / self.totalcredits
         self.cgpa=format(cgpa,'.2f')
