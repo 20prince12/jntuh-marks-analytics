@@ -19,7 +19,7 @@ def calculate():
             print(student.personalData)
             print(student.marksData)
         except:
-            return render_template('cgpa.html', x='Server Error or Invalid HT no')
+            return render_template('cgpa.html', x='Server Error or Invalid HT no or backlog')
         return render_template('cgpa.html',x=student.cgpa)
     else:
         return render_template('cgpa.html')
