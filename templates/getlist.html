@@ -3,11 +3,14 @@
     HOME
 </title>
 <body>
-<form method="oist" action="/getlist">
-<input type="number" name="start">
-<input type="number" name="end">
+<form method="post" action="/getlist">
+<input type="text" name="start">
+<input type="text" name="end">
 <input type="submit">
 </form>
+{% if cgpa %}
+{{ cgpa }}
+{% endif %}
 
 </body>
 </html>
