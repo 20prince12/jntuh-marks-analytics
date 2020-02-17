@@ -4,6 +4,7 @@ import bs4,requests;
 class getResultData:
 
     def __init__(self,rollno):
+        self.backlogs=0
         originalData=requests.get('http://epayments.jntuh.ac.in/results/resultAction?degree=btech&examCode=1387&etype=r16&result=null&grad=null&type=grade16&htno='+rollno.upper());
         parsedData=bs4.BeautifulSoup(originalData.text,'html.parser')
         savedData=[]
@@ -47,6 +48,7 @@ class getResultData:
             if (points[self.marksData[x]] == 0):
                 self.totalcredits-=int(self.creditsData[x])
                 cgpa += points[self.marksData[x]] * int(self.creditsData[x]) / self.totalcredits
+                self.backlogs+=1
             else:
                 cgpa += points[self.marksData[x]] * int(self.creditsData[x]) / self.totalcredits
         self.cgpa=format(cgpa,'.2f')

@@ -9,8 +9,15 @@
         <label for="roll">Enter roll No:</label>
         <input type="text" name="roll">
         <input type="submit">
+
         {% if x %}
+               <hr><br>
             Your CGPA is : {{ x }}
+        {% endif %}
+
+        {% if y %}
+                <hr><br>
+            You have {{ y }} backlogs,better luck next time
         {% endif %}
     </form>
 </body>
