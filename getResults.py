@@ -41,9 +41,9 @@ class getResultData:
         self.personalData=personalData
         cgpa = 0
         points = {'O': 10, 'A+': 9, 'A': 8, 'B+': 7, 'B': 6, 'C': 5, 'F': 0}
-        self.totalcredits = 0;
-        for x in self.creditsData:
-            self.totalcredits += int(self.creditsData[x])
+        self.totalcredits = 24;
+        #for x in self.creditsData:
+        #    self.totalcredits += int(self.creditsData[x])
         for x in self.marksData:
             if (points[self.marksData[x]] == 0):
                 self.backlogs+=1
