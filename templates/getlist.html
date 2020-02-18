@@ -1,16 +1,63 @@
 <html>
+    <head>
 <title>
     HOME
 </title>
+<!--===============================================================================================-->	
+<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+
+         <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+<!--===============================================================================================-->
+
+         <link rel="stylesheet" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+<!--===============================================================================================-->
+
+         <link rel="stylesheet" href="{{ url_for('static', filename='vendor/animate/animate.css') }}">
+<!--===============================================================================================-->
+
+         <link rel="stylesheet" href="{{ url_for('static', filename='vendor/select2/select2.min.css') }}">
+<!--===============================================================================================-->
+
+         <link rel="stylesheet" href="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
+<!--===============================================================================================-->
+
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/util.css') }}">
+
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<!--===============================================================================================-->
+</head>
 <body>
 <form method="post" action="/getlist">
-<input type="text" name="start">
+<input type="text" style="color:red;" name="start">
 <input type="text" name="end">
 <input type="submit">
 </form>
-{% if cgpa %}
-{{ cgpa }}
-{% endif %}
+<div class="table100 ver6 m-b-110">
+    <table data-vertable="ver6">
+        <thead>
+        {% for x in marksDatalist %}
+            <tr class="row100 head">
+                <th class="column100 column2" data-column="column2">{{ x }}</th>
+            </tr>
+        {% endfor %}
+        </thead>
+        <tbody>
+            <tr class="row100">
+                <td class="column100 column2" data-column="column2">8:00 AM</td>
 
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'vendor/bootstrap/js/popper.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'vendor/select2/select2.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/main.js') }}"></script>
 </body>
 </html>

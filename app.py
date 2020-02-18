@@ -29,16 +29,28 @@ def getlist():
     if request.method == 'POST':
         start=request.form.get('start')
         end=request.form.get('end')
-        cgpa=[]
-        for x in range(60,100):
-            roll='17bk1a05'+str(x)
-            try:
-                student = getResults.getResultData(roll)
-                cgpa.append(student.cgpa)
-                #print(student.creditsData)
-                #print(student.personalData)
-                #print(student.marksData)
-            except:
-                print("invalid ht no")
-        return render_template('getlist.html', cgpa=cgpa)
+        cgpalist=[]
+        creditsDatalist=[]
+        personalDatalist=[]
+        marksDatalist=[]
+        rollno = "17BK1A05"
+        for i in range(100, 105):
+            if (i < 10):
+                ht=rollno + '0' + str(i)
+                student = getResults.getResultData(ht)
+            elif (i < 100):
+                ht=rollno + str(i)
+            elif i > 99 and i < 110:
+                ht=rollno + 'A' + str(i - 100)
+                student = getResults.getResultData(ht)
+            elif i > 109 and i < 120:
+                ht=rollno + 'B' + str(i - 110)
+                student = getResults.getResultData(ht)
+            cgpalist.append(student.cgpa)
+            personalDatalist.append(student.personalData)
+            marksDatalist.append(student.marksData)
+        print(cgpalist)
+        print(personalDatalist)
+        print(marksDatalist)
+        render_template('getlist.html')
     return render_template('getlist.html')
