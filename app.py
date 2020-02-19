@@ -1,4 +1,3 @@
-from flask_mysqldb import MySQL
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 import getResults;
 
@@ -26,7 +25,7 @@ def calculate():
 
 @app.route('/getlist', methods=['GET','POST'])
 def getlist():
-    if request.method == 'POST':
+    if 1:
         start=request.form.get('start')
         end=request.form.get('end')
         cgpalist=[]
@@ -34,23 +33,41 @@ def getlist():
         personalDatalist=[]
         marksDatalist=[]
         rollno = "17BK1A05"
-        for i in range(100, 105):
-            if (i < 10):
-                ht=rollno + '0' + str(i)
-                student = getResults.getResultData(ht)
-            elif (i < 100):
-                ht=rollno + str(i)
-            elif i > 99 and i < 110:
-                ht=rollno + 'A' + str(i - 100)
-                student = getResults.getResultData(ht)
-            elif i > 109 and i < 120:
-                ht=rollno + 'B' + str(i - 110)
-                student = getResults.getResultData(ht)
-            cgpalist.append(student.cgpa)
-            personalDatalist.append(student.personalData)
-            marksDatalist.append(student.marksData)
-        print(cgpalist)
-        print(personalDatalist)
-        print(marksDatalist)
-        render_template('getlist.html')
+
+        for i in range(105, 109):
+            try:
+                if (i < 10):
+                    ht=rollno + '0' + str(i)
+                    student = getResults.getResultData(ht)
+                elif (i < 100):
+                    ht=rollno + str(i)
+                elif i > 99 and i < 110:
+                    ht=rollno + 'A' + str(i - 100)
+                    student = getResults.getResultData(ht)
+                elif i > 109 and i < 120:
+                    ht=rollno + 'B' + str(i - 110)
+                    student = getResults.getResultData(ht)
+                cgpalist.append(student.cgpa)
+                personalDatalist.append(student.personalData)
+                marksDatalist.append(student.marksData)
+            except:
+                print("none found")
+        #print(cgpalist)
+        #print(personalDatalist)
+        #print(marksDatalist)
+        tableHead=[]
+        tableHead.append("Name")
+        for x in marksDatalist[0]:
+            tableHead.append(x)
+        tableHead.append("cgpa")
+        tableData=[]
+        for  x  in range(len(personalDatalist)):
+            tableData.append([])
+            tableData[x].append(personalDatalist[x]['NAME:'])
+        for y in marksDatalist:
+            for k in y:
+                tableData[y].append(y[k])
+        print(tableData)
+        print(tableHead)
+        return render_template('getlist.html',cgpalist=cgpalist,tableHead=tableHead,tableData=tableData)
     return render_template('getlist.html')

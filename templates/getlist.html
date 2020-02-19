@@ -1,75 +1,119 @@
-<html>
-    <head>
-<title>
-    HOME
-</title>
-<!--===============================================================================================-->	
-<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
+<!doctype html>
+<html lang="en">
 
-         <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
-<!--===============================================================================================-->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Data Tables</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/fonts/circular-std/style.css') }}">
 
-         <link rel="stylesheet" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-<!--===============================================================================================-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/libs/css/style.css') }}">
 
-         <link rel="stylesheet" href="{{ url_for('static', filename='vendor/animate/animate.css') }}">
-<!--===============================================================================================-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/datatables/css/dataTables.bootstrap4.css') }}">
 
-         <link rel="stylesheet" href="{{ url_for('static', filename='vendor/select2/select2.min.css') }}">
-<!--===============================================================================================-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/datatables/css/buttons.bootstrap4.css') }}">
 
-         <link rel="stylesheet" href="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
-<!--===============================================================================================-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/datatables/css/select.bootstrap4.css') }}">
 
-         <link rel="stylesheet" href="{{ url_for('static', filename='css/util.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/datatables/css/fixedHeader.bootstrap4.css') }}">
 
-         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-<!--===============================================================================================-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/fonts/circular-std/style.css" rel="stylesheet') }}">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/libs/css/style.css') }}">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/fonts/fontawesome/css/fontawesome-all.css') }}">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/charts/morris-bundle/morris.css') }}">
 </head>
+
 <body>
-<form method="post" action="/getlist">
-<input type="text" style="color:red;" name="start">
-<input type="text" name="end">
-<input type="submit">
-</form>
-<<<<<<< HEAD
-<div class="table100 ver6 m-b-110">
-    <table data-vertable="ver6">
-        <thead>
-        {% for x in marksDatalist %}
-            <tr class="row100 head">
-                <th class="column100 column2" data-column="column2">{{ x }}</th>
-            </tr>
-        {% endfor %}
-        </thead>
-        <tbody>
-            <tr class="row100">
-                <td class="column100 column2" data-column="column2">8:00 AM</td>
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <div class="row">
+            <!-- ============================================================== -->
+            <!-- data table  -->
+            <!-- ============================================================== -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example" class="table table-striped table-bordered second" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        {% for x in tableHead %}
+                                        <th>{{x}}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for x in tableData %}
+                                    <tr>
+                                        {% for y in tableHead %}
+                                        <td>{{ x[y] }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            </tr>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+                <h5 class="card-header">Donut Chart </h5>
+                <div class="card-body">
+                    <div id="morris_donut"></div>
+                </div>
+            </div>
+        </div>
 
-        </tbody>
-    </table>
-</div>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
 
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
 
-=======
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158724099-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
 
-  gtag('config', 'UA-158724099-1');
-</script>
->>>>>>> e9b5bcf67986617bdf8376878b867d0d71691d95
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
 
-<script type="text/javascript" src="{{ url_for('static', filename = 'vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'vendor/bootstrap/js/popper.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'vendor/select2/select2.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/main.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/libs/js/main-js.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/datatables/js/buttons.bootstrap4.min.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/datatables/js/data-table.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+
+    <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
+
+    <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/raphael.min.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/morris.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/Morrisjs.js') }}"></script>
+
 </body>
+
 </html>
