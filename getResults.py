@@ -47,6 +47,12 @@ class getResultData:
         for x in self.marksData:
             if (points[self.marksData[x]] == 0):
                 self.backlogs+=1
+                break
             else:
                 cgpa += points[self.marksData[x]] * int(self.creditsData[x]) / self.totalcredits
-        self.cgpa=format(cgpa,'.2f')
+        if(self.backlogs>0):
+            print("t")
+            self.cgpa=0
+        else:
+            print("t2")
+            self.cgpa=format(cgpa,'.2f')

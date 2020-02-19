@@ -34,7 +34,7 @@ def getlist():
         marksDatalist=[]
         rollno = "17BK1A05"
 
-        for i in range(105, 109):
+        for i in range(100, 109):
             try:
                 if (i < 10):
                     ht=rollno + '0' + str(i)
@@ -56,6 +56,7 @@ def getlist():
         #print(personalDatalist)
         #print(marksDatalist)
         tableHead=[]
+        tableHead.append("Roll.No")
         tableHead.append("Name")
         for x in marksDatalist[0]:
             tableHead.append(x)
@@ -63,6 +64,7 @@ def getlist():
         tableData=[]
         for  x  in range(len(personalDatalist)):
             tableData.append([])
+            tableData[x].append(personalDatalist[x]['HTNO:'])
             tableData[x].append(personalDatalist[x]['NAME:'])
         count=0
         for y in marksDatalist:
@@ -72,5 +74,5 @@ def getlist():
             count += 1
         print(tableData)
         print(tableHead)
-        return render_template('getlist.html',cgpalist=cgpalist,tableHead=tableHead,tableData=tableData)
+        return render_template('getlist.html',cgpalist=cgpalist,tableHead=tableHead,tableData=tableData,tableheadLen=len(tableHead),tableDatalen=len(tableData))
     return render_template('getlist.html')
