@@ -3,9 +3,8 @@ import getResults;
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return render_template('home.html')
+
+
 
 @app.route('/calculate', methods=['GET','POST'])
 def calculate():
@@ -23,29 +22,71 @@ def calculate():
     else:
         return render_template('cgpa.html')
 
-@app.route('/getlist', methods=['GET','POST'])
-def getlist():
-    if 1:
-        start=request.form.get('start')
-        end=request.form.get('end')
+@app.route('/',methods=['GET','POST'])
+def index():
+    if request.method=="POST":
+        a=request.form.get('start').upper()
+        b=request.form.get('end').upper()
         cgpalist=[]
-        creditsDatalist=[]
         personalDatalist=[]
         marksDatalist=[]
-        rollno = "17BK1A05"
+        d = {'A': 0,
+             'B': 1,
+             'C': 2,
+             'D': 3,
+             'E': 4,
+             'F': 5,
+             'G': 6,
+             'H': 7,
+             }
+        rollno =a[0:8]
+        s1 = str(a[8:10])
+        s2 = str(b[8:10])
+        def test(s1):
+            try:
 
-        for i in range(100, 109):
+                s1 = int(s1)
+                return s1
+            except:
+                s1 = str(d[s1[0]]) + str(s1[1])
+                s1 = 100 + int(s1)
+            return s1
+
+        start = test(s1)
+        end = test(s2)
+        print(start)
+        print(end)
+        for i in range(start, end+1):
             try:
                 if (i < 10):
                     ht=rollno + '0' + str(i)
                     student = getResults.getResultData(ht)
                 elif (i < 100):
                     ht=rollno + str(i)
+                    student = getResults.getResultData(ht)
                 elif i > 99 and i < 110:
                     ht=rollno + 'A' + str(i - 100)
                     student = getResults.getResultData(ht)
                 elif i > 109 and i < 120:
                     ht=rollno + 'B' + str(i - 110)
+                    student = getResults.getResultData(ht)
+                elif i > 119 and i < 130:
+                    ht=rollno + 'C' + str(i - 120)
+                    student = getResults.getResultData(ht)
+                elif i > 129 and i < 140:
+                    ht=rollno + 'D' + str(i - 130)
+                    student = getResults.getResultData(ht)
+                elif i > 139 and i < 150:
+                    ht=rollno + 'E' + str(i - 140)
+                    student = getResults.getResultData(ht)
+                elif i > 149 and i < 160:
+                    ht=rollno + 'F' + str(i - 150)
+                    student = getResults.getResultData(ht)
+                elif i > 159 and i < 170:
+                    ht=rollno + 'G' + str(i - 160)
+                    student = getResults.getResultData(ht)
+                elif i > 169 and i < 180:
+                    ht=rollno + 'H' + str(i - 170)
                     student = getResults.getResultData(ht)
                 cgpalist.append(student.cgpa)
                 personalDatalist.append(student.personalData)

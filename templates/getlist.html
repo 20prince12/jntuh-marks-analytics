@@ -30,10 +30,40 @@
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- main wrapper -->
-    <!-- ============================================================== -->
-    <div class="dashboard-main-wrapper">
+
+    <div style="padding:50px" class="dashboard-main-wrapper">
+
+<form method="POST" action="\">
+
+  <div style="padding-bottom: 20px" class="row">
+
+    <div class="col">
+
+      <div class="md-form mt-0">
+        <input type="text" name="start" class="form-control" placeholder="Starting Roll No ">
+      </div>
+    </div>
+
+    <div class="col">
+
+      <div class="md-form mt-0">
+        <input type="text" name="end" class="form-control" placeholder="Ending Roll No">
+      </div>
+
+    </div>
+      <div class="col">
+
+      <div class="md-form mt-0">
+        <input class="btn btn-success" type="submit">
+      </div>
+
+    </div>
+
+  </div>
+
+</form>
+
+
         <div class="row">
             <!-- ============================================================== -->
             <!-- data table  -->
@@ -113,7 +143,7 @@
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/morris.js') }}"></script>
 
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/Morrisjs.js') }}"></script>
-
+    </div>
 </body>
 
 </html>
