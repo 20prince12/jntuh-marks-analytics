@@ -64,9 +64,12 @@ def getlist():
         for  x  in range(len(personalDatalist)):
             tableData.append([])
             tableData[x].append(personalDatalist[x]['NAME:'])
+        count=0
         for y in marksDatalist:
             for k in y:
-                tableData[y].append(y[k])
+                tableData[count].append(y[k])
+            tableData[count].append(cgpalist[count])
+            count += 1
         print(tableData)
         print(tableHead)
         return render_template('getlist.html',cgpalist=cgpalist,tableHead=tableHead,tableData=tableData)
