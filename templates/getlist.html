@@ -31,7 +31,7 @@
 
 <body>
 
-    <div style="padding:50px" class="dashboard-main-wrapper">
+    <div style="padding:20px" class="dashboard-main-wrapper">
 
 <form method="POST" action="\">
 
@@ -145,5 +145,17 @@
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/Morrisjs.js') }}"></script>
     </div>
 </body>
+<script>
+    $(function(){
+    $(".wrapper1").scroll(function(){
+        $(".wrapper2")
+            .scrollLeft($(".wrapper1").scrollLeft());
+    });
+    $(".wrapper2").scroll(function(){
+        $(".wrapper1")
+            .scrollLeft($(".wrapper2").scrollLeft());
+    });
+});
+</script>
 
 </html>

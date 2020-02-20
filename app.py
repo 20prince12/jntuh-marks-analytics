@@ -101,9 +101,10 @@ def index():
         failed=0
         tableHead.append("Roll.No")
         tableHead.append("Name")
+        tableHead.append("CGPA")
         for x in marksDatalist[0]:
             tableHead.append(x)
-        tableHead.append("cgpa")
+
         tableData=[]
         for  x  in range(len(personalDatalist)):
             tableData.append([])
@@ -111,9 +112,9 @@ def index():
             tableData[x].append(personalDatalist[x]['NAME:'])
         count=0
         for y in marksDatalist:
+            tableData[count].append(cgpalist[count])
             for k in y:
                 tableData[count].append(y[k])
-            tableData[count].append(cgpalist[count])
             count += 1
         print(tableData)
         print(tableHead)
