@@ -97,6 +97,8 @@ def index():
         #print(personalDatalist)
         #print(marksDatalist)
         tableHead=[]
+        passed=0
+        failed=0
         tableHead.append("Roll.No")
         tableHead.append("Name")
         for x in marksDatalist[0]:
@@ -115,5 +117,9 @@ def index():
             count += 1
         print(tableData)
         print(tableHead)
+        failed=cgpalist.count(0)
+        passed=len(cgpalist)-failed
+        print(passed)
+        print(failed)
         return render_template('getlist.html',cgpalist=cgpalist,tableHead=tableHead,tableData=tableData,tableheadLen=len(tableHead),tableDatalen=len(tableData))
     return render_template('getlist.html')
