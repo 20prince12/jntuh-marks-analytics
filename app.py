@@ -50,7 +50,7 @@ def index():
             return render_template('home.html')
         for i in range(start, end+1):
             try:
-                time.sleep(5)
+                time.sleep(1)
                 if (i < 10):
                     ht=rollno + '0' + str(i)
                     student = getResults.getResultData(ht,res[0],res[1])
