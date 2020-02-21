@@ -101,7 +101,7 @@ def index():
             except:
                 print("none found")
         #print(cgpalist)
-        #print(personalDatalist)
+        print(personalDatalist)
         #print(marksDatalist)
         tableHead=[]
         passed=0

@@ -6,6 +6,7 @@ class getResultData:
     def __init__(self,rollno,code,batch):
         self.backlogs=0
         originalData=requests.get(f'http://epayments.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=grade{batch}&htno='+rollno.upper());
+
         parsedData=bs4.BeautifulSoup(originalData.text,'html.parser')
         savedData=[]
         for x in parsedData.find_all('td'):
@@ -16,17 +17,24 @@ class getResultData:
                     savedData[4]:savedData[5],
                     savedData[6]:savedData[7]
                   }
-        print(savedData)
-        marksData={}
-        creditsData={}
-        for x in range(13, len(savedData)-1, 4):
+        #print(savedData)
+        personalData = {savedData[0]: savedData[1],
+                        savedData[2]: savedData[3],
+                        savedData[4]: savedData[5],
+                        savedData[6]: savedData[7]
+                        }
+
+        marksData = {}
+        creditsData = {}
+        print(len(savedData))
+        for x in range(13,46,4):
             marksData[savedData[x]]=savedData[x+1]
             creditsData[savedData[x]]=savedData[x+2]
-        print(marksData)
-        print(creditsData)
-        self.creditsData=creditsData
-        self.marksData=marksData
-        self.personalData=personalData
+        self.creditsData = creditsData
+        self.marksData = marksData
+        self.personalData = personalData
+        #print(marksData)
+        #print(creditsData)
         cgpa = 0
         points = {'O': 10, 'A+': 9, 'A': 8, 'B+': 7, 'B': 6, 'C': 5, 'F': 0}
         self.totalcredits = 0;
