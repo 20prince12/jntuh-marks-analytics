@@ -50,7 +50,7 @@ def index():
             return render_template('home.html')
         for i in range(start, end+1):
             try:
-                time.sleep(1)
+                time.sleep(0.05)
                 if (i < 10):
                     ht=rollno + '0' + str(i)
                     student = getResults.getResultData(ht,res[0],res[1])
@@ -87,7 +87,7 @@ def index():
             except:
                 print("none found")
         #print(cgpalist)
-        print(personalDatalist)
+        #print(personalDatalist)
         #print(marksDatalist)
         tableHead=[]
         passed=0
@@ -117,8 +117,8 @@ def index():
         #print(failed)
         passper=format(((passed/(passed+failed))*100),'.2f')
         failper=format(((failed/(passed+failed))*100),'.2f')
-        print(passper)
-        print(failper)
+        #print(passper)
+        #print(failper)
 
         return render_template('getlist.html',cgpalist=cgpalist,tableHead=tableHead,tableData=tableData,tableheadLen=len(tableHead),tableDatalen=len(tableData),passper=passper,failper=failper)
     return render_template('home.html')
