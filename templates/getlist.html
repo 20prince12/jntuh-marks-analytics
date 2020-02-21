@@ -63,7 +63,7 @@
 
 </form>
 
-
+{% if tableData %}
         <div class="row">
             <!-- ============================================================== -->
             <!-- data table  -->
@@ -95,16 +95,18 @@
                 </div>
             </div>
         </div>
-
+    {% endif %}
+{% if tableData %}
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="card">
-                <h5 class="card-header">Donut Chart </h5>
+                <h5 class="card-header">Total Result</h5>
                 <div class="card-body">
-                    <div id="morris_donut"></div>
+                    <div id="totalRes"></div>
                 </div>
             </div>
         </div>
-
+{% endif %}
+    </div>
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
 
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
@@ -143,7 +145,27 @@
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/morris.js') }}"></script>
 
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/Morrisjs.js') }}"></script>
-    </div>
+    {% if tableData %}
+     <script>
+        console.log("test")
+    Morris.Donut({
+  element: 'totalRes',
+  data: [
+    {value: {{ passper }}, label: 'pass%'},
+
+    {value: {{ failper }}, label: 'fail%'}
+  ],
+  backgroundColor: '#ccc',
+  labelColor: '#060',
+  colors: [
+    '#0BA462',
+    '#FF5722',
+  ],
+  formatter: function (x) { return x + "%"}
+});
+</script>
+    {% endif %}
+
 </body>
 <script>
     $(function(){

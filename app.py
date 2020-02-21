@@ -116,11 +116,15 @@ def index():
             for k in y:
                 tableData[count].append(y[k])
             count += 1
-        print(tableData)
-        print(tableHead)
+        #print(tableData)
+        #print(tableHead)
         failed=cgpalist.count(0)
         passed=len(cgpalist)-failed
-        print(passed)
-        print(failed)
-        return render_template('getlist.html',cgpalist=cgpalist,tableHead=tableHead,tableData=tableData,tableheadLen=len(tableHead),tableDatalen=len(tableData))
+        #print(passed)
+        #print(failed)
+        passper=format(((passed/(passed+failed))*100),'.2f')
+        failper=format(((failed/(passed+failed))*100),'.2f')
+        print(passper)
+        print(failper)
+        return render_template('getlist.html',cgpalist=cgpalist,tableHead=tableHead,tableData=tableData,tableheadLen=len(tableHead),tableDatalen=len(tableData),passper=passper,failper=failper)
     return render_template('getlist.html')
