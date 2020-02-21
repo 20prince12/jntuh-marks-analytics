@@ -3,9 +3,9 @@ import bs4,requests;
 
 class getResultData:
 
-    def __init__(self,rollno):
+    def __init__(self,rollno,code,batch):
         self.backlogs=0
-        originalData=requests.get('http://epayments.jntuh.ac.in/results/resultAction?degree=btech&examCode=1387&etype=r16&result=null&grad=null&type=grade16&htno='+rollno.upper());
+        originalData=requests.get(f'http://epayments.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=grade{batch}&htno='+rollno.upper());
         parsedData=bs4.BeautifulSoup(originalData.text,'html.parser')
         savedData=[]
         for x in parsedData.find_all('td'):
@@ -41,9 +41,9 @@ class getResultData:
         self.personalData=personalData
         cgpa = 0
         points = {'O': 10, 'A+': 9, 'A': 8, 'B+': 7, 'B': 6, 'C': 5, 'F': 0}
-        self.totalcredits = 24;
-        #for x in self.creditsData:
-        #    self.totalcredits += int(self.creditsData[x])
+        self.totalcredits = 0;
+        for x in self.creditsData:
+            self.totalcredits += int(self.creditsData[x])
         for x in self.marksData:
             if (points[self.marksData[x]] == 0):
                 self.backlogs+=1

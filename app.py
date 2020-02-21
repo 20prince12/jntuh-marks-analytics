@@ -22,11 +22,16 @@ def calculate():
     else:
         return render_template('cgpa.html')
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/getlist',methods=['GET','POST'])
 def index():
     if request.method=="POST":
         a=request.form.get('start').upper()
         b=request.form.get('end').upper()
+        res=request.form.get('result').split(".")
         cgpalist=[]
         personalDatalist=[]
         marksDatalist=[]
@@ -56,38 +61,40 @@ def index():
         end = test(s2)
         print(start)
         print(end)
+        if(end-start<0 or end-start>180):
+            return render_template('home.html')
         for i in range(start, end+1):
             try:
                 if (i < 10):
                     ht=rollno + '0' + str(i)
-                    student = getResults.getResultData(ht)
+                    student = getResults.getResultData(ht,res[0],res[1])
                 elif (i < 100):
                     ht=rollno + str(i)
-                    student = getResults.getResultData(ht)
+                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 99 and i < 110:
                     ht=rollno + 'A' + str(i - 100)
-                    student = getResults.getResultData(ht)
+                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 109 and i < 120:
                     ht=rollno + 'B' + str(i - 110)
-                    student = getResults.getResultData(ht)
+                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 119 and i < 130:
                     ht=rollno + 'C' + str(i - 120)
-                    student = getResults.getResultData(ht)
+                    student = getResults.getResultData(ht, res[0], res[1])
                 elif i > 129 and i < 140:
                     ht=rollno + 'D' + str(i - 130)
-                    student = getResults.getResultData(ht)
+                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 139 and i < 150:
                     ht=rollno + 'E' + str(i - 140)
-                    student = getResults.getResultData(ht)
+                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 149 and i < 160:
                     ht=rollno + 'F' + str(i - 150)
-                    student = getResults.getResultData(ht)
+                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 159 and i < 170:
                     ht=rollno + 'G' + str(i - 160)
-                    student = getResults.getResultData(ht)
+                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 169 and i < 180:
                     ht=rollno + 'H' + str(i - 170)
-                    student = getResults.getResultData(ht)
+                    student = getResults.getResultData(ht,res[0],res[1])
                 cgpalist.append(student.cgpa)
                 personalDatalist.append(student.personalData)
                 marksDatalist.append(student.marksData)
@@ -127,4 +134,4 @@ def index():
         print(passper)
         print(failper)
         return render_template('getlist.html',cgpalist=cgpalist,tableHead=tableHead,tableData=tableData,tableheadLen=len(tableHead),tableDatalen=len(tableData),passper=passper,failper=failper)
-    return render_template('getlist.html')
+    return render_template('home.html')

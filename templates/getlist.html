@@ -2,6 +2,11 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/libs/css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/charts/morris-bundle/morris.css') }}">
      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/datatables/css/dataTables.bootstrap4.css') }}">
 
@@ -12,36 +17,6 @@
       <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/datatables/css/fixedHeader.bootstrap4.css') }}">
 
     <div style="padding:20px" class="dashboard-main-wrapper">
-
-<form method="POST" action="\">
-
-  <div style="padding-bottom: 20px" class="row">
-
-    <div class="col">
-
-      <div class="md-form mt-0">
-        <input type="text" name="start" class="form-control" placeholder="Starting Roll No ">
-      </div>
-    </div>
-
-    <div class="col">
-
-      <div class="md-form mt-0">
-        <input type="text" name="end" class="form-control" placeholder="Ending Roll No">
-      </div>
-
-    </div>
-      <div class="col">
-
-      <div class="md-form mt-0">
-        <input class="btn btn-success" type="submit">
-      </div>
-
-    </div>
-
-  </div>
-
-</form>
 
 {% if tableData %}
         <div class="row">
