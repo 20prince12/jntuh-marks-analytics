@@ -10,32 +10,20 @@ class getResultData:
         savedData=[]
         for x in parsedData.find_all('td'):
             savedData.append(str(x).replace('<td>','').replace('<b>','').replace('</b>','').replace('<h4>','').replace('</td>','').replace('</h4',''))
-
+        savedData=savedData[0:48]
         personalData={savedData[0]:savedData[1],
                     savedData[2]:savedData[3],
                     savedData[4]:savedData[5],
                     savedData[6]:savedData[7]
                   }
-        marksData={savedData[13]:savedData[14],
-                    savedData[17]:savedData[18],
-                    savedData[21]:savedData[22],
-                    savedData[25]:savedData[26],
-                    savedData[29]:savedData[30],
-                    savedData[33]:savedData[34],
-                    savedData[37]:savedData[38],
-                    savedData[41]:savedData[42],
-                    savedData[45]:savedData[46]
-                    }
-        creditsData={savedData[13]:savedData[15],
-                    savedData[17]:savedData[19],
-                    savedData[21]:savedData[23],
-                    savedData[25]:savedData[27],
-                    savedData[29]:savedData[31],
-                    savedData[33]:savedData[35],
-                    savedData[37]:savedData[39],
-                    savedData[41]:savedData[43],
-                    savedData[45]:savedData[47]
-                    }
+        print(savedData)
+        marksData={}
+        creditsData={}
+        for x in range(13, len(savedData)-1, 4):
+            marksData[savedData[x]]=savedData[x+1]
+            creditsData[savedData[x]]=savedData[x+2]
+        print(marksData)
+        print(creditsData)
         self.creditsData=creditsData
         self.marksData=marksData
         self.personalData=personalData

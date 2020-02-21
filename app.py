@@ -133,5 +133,6 @@ def index():
         failper=format(((failed/(passed+failed))*100),'.2f')
         print(passper)
         print(failper)
+
         return render_template('getlist.html',cgpalist=cgpalist,tableHead=tableHead,tableData=tableData,tableheadLen=len(tableHead),tableDatalen=len(tableData),passper=passper,failper=failper)
     return render_template('home.html')
