@@ -60,9 +60,8 @@
                 </div>
             </div>
         </div>
-{% endif %}
     </div>
-
+{% endif %}
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -94,7 +93,60 @@
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/Morrisjs.js') }}"></script>
     {% if tableData %}
      <script>
-        console.log("test")
+     function renderChart(name,pass,fail){
+        if(name=='CGPA') return;
+         const  elem = document.createElement('div');
+         elem.innerHTML=`<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+                <h5 class="card-header">${name}</h5>
+                <div class="card-body">
+                    <div id="${name}"></div>
+                </div>
+            </div>
+        </div>`;
+         document.body.appendChild(elem)
+        failper=parseFloat((fail/(fail+pass))*100).toFixed(2);
+         passper=parseFloat((pass/(fail+pass))*100).toFixed(2);
+          Morris.Donut({
+  element: name,
+  data: [
+    {value: passper, label: 'pass%'},
+
+    {value: failper, label: 'fail%'}
+  ],
+  backgroundColor: '#ccc',
+  labelColor: '#060',
+  colors: [
+    '#0BA462',
+    '#FF5722',
+  ],
+  formatter: function (x) { return x + "%"}
+});
+     }
+
+     percentage={}
+     for(i=2;i<document.querySelectorAll('th').length;i++){
+         percentage[document.querySelectorAll('th')[i].innerText]=[0,0];
+         //console.log(document.querySelectorAll('th')[i].innerText);
+         for(k=0;k<document.querySelector('table').rows.length-1;k++){
+             if(document.querySelectorAll('td')[i+k*document.querySelectorAll('th').length].innerText=='F'){
+                 percentage[document.querySelectorAll('th')[i].innerText][1]++;
+             }
+             else {
+                 percentage[document.querySelectorAll('th')[i].innerText][0]++;
+             }
+             //console.log(document.querySelectorAll('td')[i+k*document.querySelectorAll('th').length].innerText);
+         }
+     }
+console.log(percentage)
+
+     for (var key in percentage) {
+    if (percentage.hasOwnProperty(key)) {
+       renderChart(key ,percentage[key][0],percentage[key][1]);
+    }
+}
+
+
     Morris.Donut({
   element: 'totalRes',
   data: [
