@@ -3,25 +3,6 @@ import getResults;
 
 app = Flask(__name__)
 
-
-
-
-@app.route('/calculate', methods=['GET','POST'])
-def calculate():
-    if request.method == 'POST':
-        roll=request.form.get('roll')
-        try:
-            student=getResults.getResultData(roll)
-            print(student.cgpa)
-            print(student.creditsData)
-            print(student.personalData)
-            print(student.marksData)
-        except:
-            return render_template('cgpa.html', x='Server Error or Invalid HT')
-        return render_template('cgpa.html',x=student.cgpa,y=student.backlogs)
-    else:
-        return render_template('cgpa.html')
-
 @app.route('/',methods=['GET','POST'])
 def index():
     if request.method=="POST":
