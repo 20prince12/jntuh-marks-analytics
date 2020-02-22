@@ -80,14 +80,14 @@ def index():
                     ht=rollno + 'H' + str(i - 170)
                 id=ht+res[0]+res[1]
                 curs = mysql.connection.cursor()
-                print("test")
                 if curs.execute("SELECT * FROM data WHERE id=%s", [id]) >= 1:
                     print(id)
                     curs.execute("SELECT * FROM data WHERE id=%s", [id])  # id level info
                     dict = curs.fetchone()
-                    xcgpa=int(dict['cgpa'])
-                    xpersonalData=dict['personalData']
-                    xmarksData=dict['marksData']
+                    xcgpa=float(dict['cgpa'])
+                    xpersonalData=eval(dict['personalData'])
+                    xmarksData=eval(dict['marksData'])
+
                 else:
                     student = getResults.getResultData(ht, res[0], res[1])
                     curs.execute("INSERT INTO data(id, cgpa, personalData, marksData) VALUES(%s, %s, %s, %s)",
@@ -95,7 +95,6 @@ def index():
                     xcgpa=student.cgpa
                     xpersonalData=student.personalData
                     xmarksData=student.marksData
-                print("test3")
                 cgpalist.append(xcgpa)
                 personalDatalist.append(xpersonalData)
                 marksDatalist.append(xmarksData)
