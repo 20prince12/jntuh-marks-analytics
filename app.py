@@ -2,8 +2,6 @@ from flask import Flask, render_template,request
 import getResults
 from flask_mysqldb import MySQL
 
-
-
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = '127.0.0.1'
@@ -85,10 +83,9 @@ def index():
                 print("test")
                 if curs.execute("SELECT * FROM data WHERE id=%s", [id]) >= 1:
                     print(id)
-                    curs.execute("SELECT * FROM data WHERE id=%s", ['17BK1A05A7138716'])  # id level info
+                    curs.execute("SELECT * FROM data WHERE id=%s", [id])  # id level info
                     dict = curs.fetchone()
                     xcgpa=int(dict['cgpa'])
-
                     xpersonalData=dict['personalData']
                     xmarksData=dict['marksData']
                 else:
