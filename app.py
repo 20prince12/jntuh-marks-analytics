@@ -1,5 +1,5 @@
-from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
-import getResults,time;
+from flask import Flask, render_template,request
+import getResults
 
 
 app = Flask(__name__)
