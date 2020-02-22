@@ -1,9 +1,17 @@
 from flask import Flask, render_template,request
 import getResults
+from flask_mysqldb import MySQL
+
 
 
 app = Flask(__name__)
 
+app.config['MYSQL_HOST'] = '127.0.0.1'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'asm'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+mysql = MySQL(app)
 
 
 
@@ -13,6 +21,7 @@ def home():
 
 @app.route('/getlist',methods=['GET','POST'])
 def index():
+
     if request.method=="POST":
         a=request.form.get('start').upper()
         b=request.form.get('end').upper()
@@ -44,46 +53,55 @@ def index():
 
         start = test(s1)
         end = test(s2)
-        print(start)
-        print(end)
+        #print(start)
+        #print(end)
         if(end-start<0 or end-start>180):
             return render_template('home.html')
         for i in range(start, end+1):
             try:
-                
                 if (i < 10):
                     ht=rollno + '0' + str(i)
-                    student = getResults.getResultData(ht,res[0],res[1])
                 elif (i < 100):
                     ht=rollno + str(i)
-                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 99 and i < 110:
                     ht=rollno + 'A' + str(i - 100)
-                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 109 and i < 120:
                     ht=rollno + 'B' + str(i - 110)
-                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 119 and i < 130:
                     ht=rollno + 'C' + str(i - 120)
                     student = getResults.getResultData(ht, res[0], res[1])
                 elif i > 129 and i < 140:
                     ht=rollno + 'D' + str(i - 130)
-                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 139 and i < 150:
                     ht=rollno + 'E' + str(i - 140)
-                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 149 and i < 160:
                     ht=rollno + 'F' + str(i - 150)
-                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 159 and i < 170:
                     ht=rollno + 'G' + str(i - 160)
-                    student = getResults.getResultData(ht,res[0],res[1])
                 elif i > 169 and i < 180:
                     ht=rollno + 'H' + str(i - 170)
-                    student = getResults.getResultData(ht,res[0],res[1])
-                cgpalist.append(student.cgpa)
-                personalDatalist.append(student.personalData)
-                marksDatalist.append(student.marksData)
+                id=ht+res[0]+res[1]
+                curs = mysql.connection.cursor()
+                print("test")
+                if curs.execute("SELECT * FROM data WHERE id=%s", [id]) >= 1:
+                    print(id)
+                    curs.execute("SELECT * FROM data WHERE id=%s", ['17BK1A05A7138716'])  # id level info
+                    dict = curs.fetchone()
+                    xcgpa=int(dict['cgpa'])
+
+                    xpersonalData=dict['personalData']
+                    xmarksData=dict['marksData']
+                else:
+                    student = getResults.getResultData(ht, res[0], res[1])
+                    curs.execute("INSERT INTO data(id, cgpa, personalData, marksData) VALUES(%s, %s, %s, %s)",
+                             (id, student.cgpa, student.personalData, student.marksData))
+                    xcgpa=student.cgpa
+                    xpersonalData=student.personalData
+                    xmarksData=student.marksData
+                print("test3")
+                cgpalist.append(xcgpa)
+                personalDatalist.append(xpersonalData)
+                marksDatalist.append(xmarksData)
             except:
                 print("none found")
         #print(cgpalist)
