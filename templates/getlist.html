@@ -1,16 +1,14 @@
-<!doctype html>
-<html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>JNTUH RESULT ANALYTICS</title>
-      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/fonts/circular-std/style.css') }}">
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
 
       <link rel="stylesheet" href="{{ url_for('static', filename='assets/libs/css/style.css') }}">
-
-      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/datatables/css/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/charts/morris-bundle/morris.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/datatables/css/dataTables.bootstrap4.css') }}">
 
       <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/datatables/css/buttons.bootstrap4.css') }}">
 
@@ -18,52 +16,9 @@
 
       <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/datatables/css/fixedHeader.bootstrap4.css') }}">
 
-      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
-
-      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/fonts/circular-std/style.css" rel="stylesheet') }}">
-
-      <link rel="stylesheet" href="{{ url_for('static', filename='assets/libs/css/style.css') }}">
-
-      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/fonts/fontawesome/css/fontawesome-all.css') }}">
-
-      <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/charts/morris-bundle/morris.css') }}">
-</head>
-
-<body>
-
     <div style="padding:20px" class="dashboard-main-wrapper">
 
-<form method="POST" action="\">
-
-  <div style="padding-bottom: 20px" class="row">
-
-    <div class="col">
-
-      <div class="md-form mt-0">
-        <input type="text" name="start" class="form-control" placeholder="Starting Roll No ">
-      </div>
-    </div>
-
-    <div class="col">
-
-      <div class="md-form mt-0">
-        <input type="text" name="end" class="form-control" placeholder="Ending Roll No">
-      </div>
-
-    </div>
-      <div class="col">
-
-      <div class="md-form mt-0">
-        <input class="btn btn-success" type="submit">
-      </div>
-
-    </div>
-
-  </div>
-
-</form>
-
-
+{% if tableData %}
         <div class="row">
             <!-- ============================================================== -->
             <!-- data table  -->
@@ -95,25 +50,18 @@
                 </div>
             </div>
         </div>
-
+    {% endif %}
+{% if tableData %}
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="card">
-                <h5 class="card-header">Donut Chart </h5>
+                <h5 class="card-header">Total Result</h5>
                 <div class="card-body">
-                    <div id="morris_donut"></div>
+                    <div id="totalRes"></div>
                 </div>
             </div>
         </div>
-
-        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
-
-        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
-
-        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
-
-        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
-
-        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/libs/js/main-js.js') }}"></script>
+    </div>
+{% endif %}
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -143,19 +91,78 @@
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/morris.js') }}"></script>
 
         <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/charts/morris-bundle/Morrisjs.js') }}"></script>
-    </div>
-</body>
-<script>
-    $(function(){
-    $(".wrapper1").scroll(function(){
-        $(".wrapper2")
-            .scrollLeft($(".wrapper1").scrollLeft());
-    });
-    $(".wrapper2").scroll(function(){
-        $(".wrapper1")
-            .scrollLeft($(".wrapper2").scrollLeft());
-    });
+    {% if tableData %}
+     <script>
+     function renderChart(name,pass,fail){
+        if(name=='CGPA') return;
+         const  elem = document.createElement('div');
+         elem.innerHTML=`<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+                <h5 class="card-header">${name}</h5>
+                <div class="card-body">
+                    <div id="${name}"></div>
+                </div>
+            </div>
+        </div>`;
+         document.body.appendChild(elem)
+        failper=parseFloat((fail/(fail+pass))*100).toFixed(2);
+         passper=parseFloat((pass/(fail+pass))*100).toFixed(2);
+          Morris.Donut({
+  element: name,
+  data: [
+    {value: passper, label: 'pass%'},
+
+    {value: failper, label: 'fail%'}
+  ],
+  backgroundColor: '#ccc',
+  labelColor: '#060',
+  colors: [
+    '#0BA462',
+    '#FF5722',
+  ],
+  formatter: function (x) { return x + "%"}
+});
+     }
+
+     percentage={}
+     for(i=2;i<document.querySelectorAll('th').length;i++){
+         percentage[document.querySelectorAll('th')[i].innerText]=[0,0];
+         //console.log(document.querySelectorAll('th')[i].innerText);
+         for(k=0;k<document.querySelector('table').rows.length-1;k++){
+             if(document.querySelectorAll('td')[i+k*document.querySelectorAll('th').length].innerText=='F'){
+                 percentage[document.querySelectorAll('th')[i].innerText][1]++;
+             }
+             else {
+                 percentage[document.querySelectorAll('th')[i].innerText][0]++;
+             }
+             //console.log(document.querySelectorAll('td')[i+k*document.querySelectorAll('th').length].innerText);
+         }
+     }
+console.log(percentage)
+
+     for (var key in percentage) {
+    if (percentage.hasOwnProperty(key)) {
+       renderChart(key ,percentage[key][0],percentage[key][1]);
+    }
+}
+
+
+    Morris.Donut({
+  element: 'totalRes',
+  data: [
+    {value: {{ passper }}, label: 'pass%'},
+
+    {value: {{ failper }}, label: 'fail%'}
+  ],
+  backgroundColor: '#ccc',
+  labelColor: '#060',
+  colors: [
+    '#0BA462',
+    '#FF5722',
+  ],
+  formatter: function (x) { return x + "%"}
 });
 </script>
+    {% endif %}
 
-</html>
+{%  endblock %}

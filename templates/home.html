@@ -1,19 +1,57 @@
-<html>
-<title>
-    HOME
-</title>
-<body>
-Under maintenance
-</form>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158724099-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+{% extends 'layout.html' %}
+{% block body %}
 
-  gtag('config', 'UA-158724099-1');
-</script>
-<script data-ad-client="ca-pub-8044282405443558" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-</body>
-</html>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/libs/css/main.css') }}">
+    <div class="page-wrapper bg-img-2 p-t-290 p-b-120">
+        <div class="wrapper wrapper--w1226">
+            <div class="card card-5">
+                <div class="card-body">
+                    <form method="POST" action="/getlist">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">from</label>
+                                    <input maxlength="10" minlength="10" class="input--style-1" type="text" name="start" placeholder="Starting Roll No Ex:17bk1a0560" required="required">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">to</label>
+                                    <input maxlength="10" minlength="10" class="input--style-1" type="text" name="end" placeholder="Ending Roll No  Ex:17bk1a0580" required="required">
+                                </div>
+                            </div>
+                        </div>
+
+                            <div class="col-2">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group m-b-0">
+                                            <label class="label">Select Result</label>
+                                            <select class="input--style-1" type="text" name="result" id="input-end">
+                                               <option value="1387.16">III Year I Semister Regular(R16)</option>
+                                                <option value="1383.16">IV Year I Semister Regular(R16)</option>
+                                                <!--<option value="1391.17">II Year II Semister Regular(R18)</option>-->
+                                            </select>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <button class="btn-submit" type="submit">GO</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Main JS-->
+ <script type="text/javascript" src="{{ url_for('static', filename = 'assets/libs/js/global.js') }}"></script>
+
+<!-- end document-->
+{% endblock %}
