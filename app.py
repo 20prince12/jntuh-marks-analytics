@@ -67,7 +67,6 @@ def index():
                     ht=rollno + 'B' + str(i - 110)
                 elif i > 119 and i < 130:
                     ht=rollno + 'C' + str(i - 120)
-                    student = getResults.getResultData(ht, res[0], res[1])
                 elif i > 129 and i < 140:
                     ht=rollno + 'D' + str(i - 130)
                 elif i > 139 and i < 150:
@@ -80,8 +79,11 @@ def index():
                     ht=rollno + 'H' + str(i - 170)
                 id=ht+res[0]+res[1]
                 curs = mysql.connection.cursor()
-                if curs.execute("SELECT * FROM data WHERE id=%s", [id]) >= 1:
-                    print(id)
+                if curs.execute("SELECT * FROM badhtno WHERE id=%s", [id]) >= 1:
+                    #print(f"{id}  not found")
+                    continue
+                elif curs.execute("SELECT * FROM data WHERE id=%s", [id]) >= 1:
+                    #print(id)
                     curs.execute("SELECT * FROM data WHERE id=%s", [id])  # id level info
                     dict = curs.fetchone()
                     xcgpa=float(dict['cgpa'])
@@ -99,7 +101,11 @@ def index():
                 personalDatalist.append(xpersonalData)
                 marksDatalist.append(xmarksData)
             except:
-                print("none found")
+                #print(f"{id}  not found2")
+                curs.execute("INSERT INTO badhtno(id) VALUES(%s)",
+                             [id])
+                mysql.connection.commit()
+
         #print(cgpalist)
         #print(personalDatalist)
         #print(marksDatalist)
