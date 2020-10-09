@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate Your CGPA</title>
+</head>
+<body>
+    <form method="post" action="/calculate">
+        <label for="roll">Enter roll No:</label>
+        <input type="text" name="roll">
+        <input type="submit">
+
+        {% if x %}
+               <hr><br>
+            Your CGPA is : {{ x }}
+        {% endif %}
+
+        {% if y %}
+                <hr><br>
+            You have {{ y }} backlog(s),better luck next time
+        {% endif %}
+    </form>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158724099-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158724099-1');
+</script>
+<script data-ad-client="ca-pub-8044282405443558" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</body>
+</html>

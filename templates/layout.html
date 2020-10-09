@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Result Analytics</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158724099-1"></script>
+    <style>
+         *{
+            font-family: 'Roboto',inherit ;
+        }
+    </style>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158724099-1');
+</script>
+</head>
+<body>
+
+ <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'assets/libs/js/main-js.js') }}"></script>
+ {% include 'header.html' %}
+{% block body %}
+{% endblock %}
+{% include 'footer.html' %}
+
+</body>
+</html>
