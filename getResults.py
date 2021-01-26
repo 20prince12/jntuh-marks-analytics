@@ -8,7 +8,7 @@ class getResultData:
             if code=='1442' or code=='1437':
                 originalData = requests.get(
                 f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper(),timeout=2.0);
-                return f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper()
+                print(f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper())
             else:
                 originalData = requests.get(
                     f'http://202.63.105.184/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=grade{batch}&htno=' + rollno.upper(),timeout=2.0);
