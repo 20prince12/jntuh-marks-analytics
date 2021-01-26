@@ -45,7 +45,7 @@ class getResultData:
                 marksData = {}
                 creditsData = {}
                 #print(len(savedData))
-                for x in range(23, end - 2, 7):
+                for x in range(16, end - 2, 7):
                     marksData[savedData[x]] = savedData[x + 4]
                     creditsData[savedData[x]] = savedData[x + 5]
                 self.creditsData = creditsData
