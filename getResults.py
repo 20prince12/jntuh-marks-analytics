@@ -7,7 +7,6 @@ class getResultData:
         try:
             if code=='1442' or code=='1437':
                 link=f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper()
-                print(link)
                 originalData = requests.get(link,timeout=5.0);
             else:
                 originalData = requests.get(
@@ -45,7 +44,7 @@ class getResultData:
 
                 marksData = {}
                 creditsData = {}
-                print(len(savedData))
+                #print(len(savedData))
                 for x in range(13, end - 2, 4):
                     marksData[savedData[x]] = savedData[x + 1]
                     creditsData[savedData[x]] = savedData[x + 2]
