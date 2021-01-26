@@ -23,6 +23,7 @@ def home():
 @app.route('/getlist',methods=['GET','POST'])
 def index():
     tcount=0
+    r.delete('17BK1A05A8144217')
     if request.method=="POST":
         a=request.form.get('start').upper()
         b=request.form.get('end').upper()
