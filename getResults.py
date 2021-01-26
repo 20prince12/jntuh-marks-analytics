@@ -8,11 +8,11 @@ class getResultData:
             if code=='1442' or code=='1437':
                 link=f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper()
                 print(link)
-                originalData = requests.get(
-                f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper(),timeout=5.0);
+                originalData = requests.get(link,timeout=5.0);
             else:
                 originalData = requests.get(
                     f'http://202.63.105.184/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=grade{batch}&htno=' + rollno.upper(),timeout=2.0);
+            print(originalData)
             parsedData = bs4.BeautifulSoup(originalData.text, 'html.parser')
             if "invalid hallticket number" in str(parsedData):
                 return "HT ERROR"
