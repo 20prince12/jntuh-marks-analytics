@@ -9,7 +9,7 @@ class getResultData:
                 link=f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper()
                 print(link)
                 originalData = requests.get(
-                f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper(),timeout=2.0);
+                f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper(),timeout=5.0);
             else:
                 originalData = requests.get(
                     f'http://202.63.105.184/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=grade{batch}&htno=' + rollno.upper(),timeout=2.0);
