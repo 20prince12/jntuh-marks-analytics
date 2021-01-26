@@ -18,7 +18,6 @@ r = redis.Redis(host=url.hostname, port=url.port, password=url.password)
 
 @app.route('/')
 def home():
-    print(r.delete('17BK1A05A8144217'))
     return render_template('home.html')
 
 @app.route('/getlist',methods=['GET','POST'])
