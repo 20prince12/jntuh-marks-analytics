@@ -8,6 +8,7 @@ class getResultData:
             print(code)
             print(code=='1442')
             if code=='1442' or code=='1437':
+                print("test")
                 originalData = requests.get(
                 f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper(),timeout=2.0);
             else:
