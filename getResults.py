@@ -5,10 +5,9 @@ class getResultData:
 
     def run(self,rollno,code,batch):
         try:
-            print(code)
-            print(code=='1442')
             if code=='1442' or code=='1437':
-                print("test")
+                link=f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper()
+                print(link)
                 originalData = requests.get(
                 f'http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode={code}&etype=r{batch}&result=null&grad=null&type=intgrade&htno=' + rollno.upper(),timeout=2.0);
             else:
