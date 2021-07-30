@@ -1,3 +1,4 @@
+setuptools==45
 beautifulsoup4==4.8.2
 certifi==2019.11.28
 chardet==3.0.4
