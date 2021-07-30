@@ -5,12 +5,12 @@ import os
 from urllib.parse import urlparse
 url = urlparse(os.environ.get("REDISCLOUD_URL"))
 app = Flask(__name__)
-myHostname = "asm.redis.cache.windows.net"
+myHostname = "jntuhcgpa.redis.cache.windows.net"
 myPassword = os.environ.get("redis_pass")
 
-r = redis.Redis(host=url.hostname, port=url.port, password=url.password)
-#r = redis.StrictRedis(host=myHostname, port=6380,
-#                      password=myPassword, ssl=True)
+#r = redis.Redis(host=url.hostname, port=url.port, password=url.password)
+r = redis.StrictRedis(host=myHostname, port=6380,
+                      password=myPassword, ssl=True)
 
 #result = r.ping()
 
