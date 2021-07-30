@@ -22,7 +22,7 @@ def home():
 
 @app.route('/getlist',methods=['GET','POST'])
 def index():
-    tcount=0
+
     if request.method=="POST":
         a=request.form.get('start').upper()
         b=request.form.get('end').upper()
@@ -121,12 +121,12 @@ def index():
                         r.set('badht'+id,'True')
                         continue
                     elif (check == "SERVER ERROR"):
-                        tcount+=1
+
                         print("Server Error")
                         continue
                         render_template("home.html")
                     elif (check == True):
-                        tcount+=1
+
                         print(f"{id} found on Server")
                         kcgpa = str(student.cgpa)
                         kpersonalData = str(student.personalData)
@@ -136,11 +136,7 @@ def index():
                         xcgpa = student.cgpa
                         xpersonalData = student.personalData
                         xmarksData = student.marksData
-                        print(tcount)
-                        if(tcount>20):
-                            url1='getlist?start='+a+'&end='+b+'&result='+ores
-                            print(url1)
-                            return redirect(url1)
+
                 cgpalist.append(xcgpa)
                 personalDatalist.append(xpersonalData)
                 marksDatalist.append(xmarksData)
