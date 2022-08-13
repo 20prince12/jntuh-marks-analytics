@@ -3,16 +3,16 @@ import getResults
 import redis
 import os
 from urllib.parse import urlparse
-url = urlparse(os.environ.get("REDISCLOUD_URL"))
+
+
+#connecting db
+db_host = os.environ.get("REDISCLOUD_HOST")
+db_port = os.environ.get("REDISCLOUD_PORT")
+db_password = os.environ.get("REDISCLOUD_PASS")
+r = redis.Redis(host=db_host, port=db_port, password=db_password)
+
+
 app = Flask(__name__)
-myHostname = "asm.redis.cache.windows.net"
-myPassword = os.environ.get("redis_pass")
-
-r = redis.Redis(host=url.hostname, port=url.port, password=url.password)
-#r = redis.StrictRedis(host=myHostname, port=6380,
-#                      password=myPassword, ssl=True)
-
-#result = r.ping()
 
 
 
