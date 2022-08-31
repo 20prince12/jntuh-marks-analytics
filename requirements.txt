@@ -11,5 +11,5 @@ redis==3.4.1
 requests
 soupsieve==1.9.5
 urllib3
-Werkzeug==0.14.1
+Werkzeug
 gunicorn==20.0.4
